@@ -24,12 +24,12 @@ export default function Home() {
 
   return (
     <main className="container mx-auto p-4 max-w-md">
-      <h1 className="text-2xl font-bold mb-6">E10-Rechner</h1>
+      <h1 className="text-2xl font-bold mb-6 text-center">E10-Rechner</h1>
       
-      <div className="space-y-4">
-        {/* Verbrauch Input */}
-        <div className="flex flex-col">
-          <label className="mb-1">Verbrauch pro 100 km (L)</label>
+      <div className="space-y-6">
+        {/* Verbrauch */}
+        <div>
+          <label className="block mb-1">Verbrauch pro 100 km (L)</label>
           <input
             type="number"
             step="0.01"
@@ -40,8 +40,8 @@ export default function Home() {
         </div>
 
         {/* Super 95 Preis */}
-        <div className="flex flex-col">
-          <label className="mb-1">Super 95 Preis (€/L)</label>
+        <div>
+          <label className="block mb-1">Super 95 Preis (€/L)</label>
           <input
             type="number"
             step="0.001"
@@ -52,8 +52,8 @@ export default function Home() {
         </div>
 
         {/* E10 Preis */}
-        <div className="flex flex-col">
-          <label className="mb-1">Super E10 Preis (€/L)</label>
+        <div>
+          <label className="block mb-1">Super E10 Preis (€/L)</label>
           <input
             type="number"
             step="0.001"
@@ -64,18 +64,18 @@ export default function Home() {
         </div>
 
         {/* Ergebnis */}
-        <div className="py-4">
-          <div className="text-lg font-medium">{ergebnis}</div>
+        <div className="py-2">
+          <div className="text-lg font-medium text-center">{ergebnis}</div>
         </div>
 
         {/* Horizontale Linie mit Abständen */}
-        <div className="py-4">
-          <hr className="my-4" />
+        <div className="py-2">
+          <hr className="border-t border-gray-300" />
         </div>
 
         {/* Strecke */}
-        <div className="flex flex-col">
-          <label className="mb-1">Strecke (km)</label>
+        <div>
+          <label className="block mb-1">Strecke (km)</label>
           <input
             type="number"
             value={strecke}
@@ -85,10 +85,10 @@ export default function Home() {
         </div>
 
         {/* Ergebnisse */}
-        <div className="space-y-2 mt-4">
-          <div>Kosten mit Super 95: {kosten95.toFixed(2).replace('.', ',')} €</div>
-          <div>Kosten mit Super E10: {kostenE10.toFixed(2).replace('.', ',')} €</div>
-          <div className="font-medium">
+        <div className="space-y-2 mt-2">
+          <div className="text-center">Kosten mit Super 95: {kosten95.toFixed(2).replace('.', ',')} €</div>
+          <div className="text-center">Kosten mit Super E10: {kostenE10.toFixed(2).replace('.', ',')} €</div>
+          <div className="font-medium text-center">
             {differenz > 0
               ? `Ersparnis mit Super E10: ${differenz.toFixed(2).replace('.', ',')} €`
               : differenz < 0
