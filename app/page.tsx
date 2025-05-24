@@ -22,74 +22,81 @@ export default function Home() {
     ergebnis = 'E10 ist teurer als Super 95.';
   }
 
-  const formatEuro = (wert: number) => wert.toFixed(2).replace('.', ',');
-
   return (
     <main className="flex min-h-screen flex-col items-center justify-start p-4">
       <h1 className="text-4xl font-bold mb-8">E10-Rechner</h1>
 
-      <div className="w-full max-w-xs">
-  <label htmlFor="verbrauch" className="block mb-1 font-medium">
-    Verbrauch pro 100 km (L):
-  </label>
-  <input
-    id="verbrauch"
-    type="number"
-    value={verbrauch}
-    onChange={(e) => setVerbrauch(parseFloat(e.target.value))}
-    className="w-full p-2 border rounded"
-  />
-</div>
-
-        <div className="flex flex-col">
-          <label className="mb-1">Super 95 Preis (€/L):</label>
-          <input
-            type="number"
-            step="0.001"
-            value={preis95}
-            onChange={(e) => setPreis95(parseFloat(e.target.value))}
-            className="p-2 border rounded"
-          />
-        </div>
-
-        <div className="flex flex-col">
-          <label className="mb-1">Super E10 Preis (€/L):</label>
-          <input
-            type="number"
-            step="0.001"
-            value={preisE10}
-            onChange={(e) => setPreisE10(parseFloat(e.target.value))}
-            className="p-2 border rounded"
-          />
-        </div>
+      <div className="w-full max-w-xs flex flex-col mb-4">
+        <label htmlFor="verbrauch" className="block mb-1">
+          Verbrauch pro 100 km (L):
+        </label>
+        <input
+          id="verbrauch"
+          type="number"
+          step="0.1"
+          value={verbrauch}
+          onChange={(e) => setVerbrauch(parseFloat(e.target.value))}
+          className="p-2 border rounded"
+        />
       </div>
 
-      <div className="mt-6 mb-2 text-center">{ergebnis}</div>
+      <div className="w-full max-w-xs flex flex-col mb-4">
+        <label htmlFor="preis95" className="block mb-1">
+          Super 95 Preis (€/L):
+        </label>
+        <input
+          id="preis95"
+          type="number"
+          step="0.001"
+          value={preis95}
+          onChange={(e) => setPreis95(parseFloat(e.target.value))}
+          className="p-2 border rounded"
+        />
+      </div>
+
+      <div className="w-full max-w-xs flex flex-col mb-4">
+        <label htmlFor="preisE10" className="block mb-1">
+          Super E10 Preis (€/L):
+        </label>
+        <input
+          id="preisE10"
+          type="number"
+          step="0.001"
+          value={preisE10}
+          onChange={(e) => setPreisE10(parseFloat(e.target.value))}
+          className="p-2 border rounded"
+        />
+      </div>
+
+      <div className="mb-2">{ergebnis}</div>
 
       <hr className="w-full my-6" />
 
-      <div className="flex flex-col gap-4 w-full max-w-xs">
-        <div className="flex flex-col">
-          <label className="mb-1">Strecke (km):</label>
-          <input
-            type="number"
-            value={strecke}
-            onChange={(e) => setStrecke(parseFloat(e.target.value))}
-            className="p-2 border rounded"
-          />
-        </div>
+      <div className="w-full max-w-xs flex flex-col mb-4">
+        <label htmlFor="strecke" className="block mb-1">
+          Strecke (km):
+        </label>
+        <input
+          id="strecke"
+          type="number"
+          value={strecke}
+          onChange={(e) => setStrecke(parseFloat(e.target.value))}
+          className="p-2 border rounded"
+        />
       </div>
 
-      <div className="mt-6 space-y-1 text-center">
-        <div>Kosten mit Super 95: {formatEuro(kosten95)} €</div>
-        <div>Kosten mit Super E10: {formatEuro(kostenE10)} €</div>
-        <div>
-          {differenz > 0
-            ? `Ersparnis mit E10: ${formatEuro(differenz)} €`
-            : differenz < 0
-            ? `Mehrkosten mit E10: ${formatEuro(Math.abs(differenz))} €`
-            : 'Kein Unterschied bei den Kosten.'}
-        </div>
+      <div className="mb-1">
+        Kosten mit Super 95: {kosten95.toFixed(2).replace('.', ',')} €
+      </div>
+      <div className="mb-1">
+        Kosten mit Super E10: {kostenE10.toFixed(2).replace('.', ',')} €
+      </div>
+      <div>
+        {differenz > 0
+          ? `Ersparnis mit E10: ${differenz.toFixed(2).replace('.', ',')} €`
+          : differenz < 0
+          ? `Mehrkosten mit E10: ${Math.abs(differenz).toFixed(2).replace('.', ',')} €`
+          : 'Kein Unterschied bei den Kosten.'}
       </div>
     </main>
   );
