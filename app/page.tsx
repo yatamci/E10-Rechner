@@ -1,79 +1,78 @@
-"use client";
+'use client';
 
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function Home() {
-  const [verbrauch95, setVerbrauch95] = useState("6.8");
-  const [preis95, setPreis95] = useState("1.689");
-  const [preisE10, setPreisE10] = useState("1.639");
-  const [strecke, setStrecke] = useState("30");
+  const [verbrauch, setVerbrauch] = useState(6.8);
+  const [preis95, setPreis95] = useState(1.689);
+  const [preisE10, setPreisE10] = useState(1.639);
+  const [strecke, setStrecke] = useState(30);
 
-  const verbrauch = parseFloat(verbrauch95) || 0;
-  const super95 = parseFloat(preis95) || 0;
-  const e10 = parseFloat(preisE10) || 0;
-  const distanz = parseFloat(strecke) || 0;
+  const kosten95 = +(verbrauch * preis95 * strecke / 100).toFixed(2);
+  const kostenE10 = +(verbrauch * preisE10 * strecke / 100).toFixed(2);
+  const differenz = +(kosten95 - kostenE10).toFixed(2);
+  const diffProzent = ((preis95 - preisE10) / preis95) * 100;
 
-  const diffProzent = ((super95 - e10) / super95) * 100;
-  const lohntText =
-    e10 > super95
-      ? "E10 ist teurer als Super 95"
-      : diffProzent < 2
-      ? "E10 lohnt sich nicht wirklich"
-      : "E10 lohnt sich";
-
-  const kosten95 = (verbrauch / 100) * super95 * distanz;
-  const kostenE10 = (verbrauch / 100) * e10 * distanz;
-
-  const kostenDifferenz = Math.abs(kosten95 - kostenE10);
-  const differenzText =
-    e10 > super95
-      ? `Mehrkosten mit E10: ${kostenDifferenz.toFixed(2)} €`
-      : `Ersparnis mit E10: ${kostenDifferenz.toFixed(2)} €`;
+  let ergebnis = '';
+  if (diffProzent >= 2) {
+    ergebnis = 'E10 lohnt sich.';
+  } else if (diffProzent >= 0) {
+    ergebnis = 'E10 lohnt sich nicht wirklich.';
+  } else {
+    ergebnis = 'E10 ist teurer als Super 95.';
+  }
 
   return (
-    <main className="p-4 space-y-6 max-w-md mx-auto">
+    <main className="flex min-h-screen flex-col items-center justify-start p-4">
+      <h1 className="text-4xl font-bold mb-8">E10-Rechner</h1>
+
+      <label className="mb-1">Verbrauch pro 100 km (L)</label>
+      <input
+        type="number"
+        step="0.1"
+        value={verbrauch}
+        onChange={(e) => setVerbrauch(parseFloat(e.target.value))}
+        className="mb-4 p-2 border rounded w-40"
+      />
+
+      <label className="mb-1">Super 95 Preis (€/L)</label>
+      <input
+        type="number"
+        step="0.001"
+        value={preis95}
+        onChange={(e) => setPreis95(parseFloat(e.target.value))}
+        className="mb-4 p-2 border rounded w-40"
+      />
+
+      <label className="mb-1">Super E10 Preis (€/L)</label>
+      <input
+        type="number"
+        step="0.001"
+        value={preisE10}
+        onChange={(e) => setPreisE10(parseFloat(e.target.value))}
+        className="mb-6 p-2 border rounded w-40"
+      />
+
+      <div className="mb-2">{ergebnis}</div>
+
+      <hr className="w-full my-6" />
+
+      <label className="mb-1">Strecke (km)</label>
+      <input
+        type="number"
+        value={strecke}
+        onChange={(e) => setStrecke(parseFloat(e.target.value))}
+        className="mb-4 p-2 border rounded w-40"
+      />
+
+      <div className="mb-1">Kosten mit Super 95: {kosten95.toFixed(2)} €</div>
+      <div className="mb-1">Kosten mit Super E10: {kostenE10.toFixed(2)} €</div>
       <div>
-        <p>Verbrauch pro 100 km (L)</p>
-        <input
-          type="number"
-          value={verbrauch95}
-          onChange={(e) => setVerbrauch95(e.target.value)}
-          className="w-full border p-2 rounded"
-        />
-
-        <p>Super 95 Preis (€/L)</p>
-        <input
-          type="number"
-          value={preis95}
-          onChange={(e) => setPreis95(e.target.value)}
-          className="w-full border p-2 rounded"
-        />
-
-        <p>Super E10 Preis (€/L)</p>
-        <input
-          type="number"
-          value={preisE10}
-          onChange={(e) => setPreisE10(e.target.value)}
-          className="w-full border p-2 rounded"
-        />
-
-        <p>{lohntText}</p>
-      </div>
-
-      <hr />
-
-      <div>
-        <p>Strecke (km)</p>
-        <input
-          type="number"
-          value={strecke}
-          onChange={(e) => setStrecke(e.target.value)}
-          className="w-full border p-2 rounded"
-        />
-
-        <p>Kosten mit Super 95: {kosten95.toFixed(2)} €</p>
-        <p>Kosten mit E10: {kostenE10.toFixed(2)} €</p>
-        <p>{differenzText}</p>
+        {differenz > 0
+          ? `Ersparnis mit E10: ${differenz.toFixed(2)} €`
+          : differenz < 0
+          ? `Mehrkosten mit E10: ${Math.abs(differenz).toFixed(2)} €`
+          : 'Kein Unterschied bei den Kosten.'}
       </div>
     </main>
   );
