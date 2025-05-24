@@ -22,6 +22,8 @@ export default function Home() {
     ergebnis = 'E10 ist teurer als Super 95!';
   }
 
+  return (
+    <main>
       <label className="mb-1">Verbrauch pro 100 km (L)</label>
       <input
         type="number"
@@ -61,7 +63,7 @@ export default function Home() {
         className="mb-4 p-2 border rounded w-40"
       />
 
-<div className="mb-1">
+      <div className="mb-1">
         Kosten mit Super 95: {kosten95.toFixed(2).replace('.', ',')} €
       </div>
       <div className="mb-1">
