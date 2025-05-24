@@ -4,80 +4,94 @@ import { useState } from "react";
 
 export default function Home() {
   const [verbrauch95, setVerbrauch95] = useState("6.8");
-  const [preis95, setPreis95] = useState("1.689");
-  const [preisE10, setPreisE10] = useState("1.639");
+  const [super95, setSuper95] = useState("1.689");
+  const [e10, setE10] = useState("1.639");
   const [strecke, setStrecke] = useState("30");
 
-  const v95 = parseFloat(verbrauch95);
-  const p95 = parseFloat(preis95);
-  const pE10 = parseFloat(preisE10);
-  const km = parseFloat(strecke);
+  const verbrauchNum = parseFloat(verbrauch95);
+  const super95Num = parseFloat(super95);
+  const e10Num = parseFloat(e10);
+  const streckeNum = parseFloat(strecke);
 
-  const ersparnisPro100km = (v95 * (p95 - pE10)).toFixed(2);
-  const lohntSich = pE10 < p95 ? "Ja, E10 lohnt sich!" : "Nein, E10 lohnt sich nicht.";
-  const kosten95 = ((km / 100) * v95 * p95).toFixed(2);
-  const kostenE10 = ((km / 100) * v95 * pE10).toFixed(2);
+  const preisUnterschied = super95Num - e10Num;
+  let lohntSichText = "";
+
+  if (e10Num > super95Num) {
+    lohntSichText = "E10 lohnt sich nicht, da es teurer ist als Super 95.";
+  } else if (preisUnterschied / super95Num < 0.02) {
+    lohntSichText = "E10 lohnt sich nicht wirklich, da es weniger als 2 % günstiger ist.";
+  } else {
+    lohntSichText = "E10 lohnt sich.";
+  }
+
+  const ersparnis = verbrauchNum / 100 * (super95Num - e10Num);
+  const istTeurer = e10Num > super95Num;
+  const textFarbe = istTeurer ? "text-red-600" : "text-green-600";
+  const ersparnisText = istTeurer ? "Mehrkosten mit E10" : "Ersparnis mit E10";
+
+  const kosten95 = verbrauchNum / 100 * super95Num * streckeNum;
+  const kostenE10 = verbrauchNum / 100 * e10Num * streckeNum;
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-start p-8 space-y-8">
+    <main className="p-4 max-w-md mx-auto space-y-6">
       <h1 className="text-2xl font-bold">E10-Rechner</h1>
 
-      <div className="flex flex-col items-center space-y-4 w-full max-w-xs">
-        <label className="w-full">
-          <div className="mb-2 font-semibold">Verbrauch pro 100 km (l)</div>
+      <div className="space-y-4">
+        <div>
+          <label className="block mb-2">Verbrauch pro 100 km (L)</label>
           <input
+            className="border p-2 w-full"
             type="number"
             value={verbrauch95}
             onChange={(e) => setVerbrauch95(e.target.value)}
-            className="border p-2 rounded w-full"
           />
-        </label>
+        </div>
 
-        <label className="w-full">
-          <div className="mb-2 font-semibold">Preis Super 95 (€/l)</div>
+        <div>
+          <label className="block mb-2">Preis Super 95 (€/L)</label>
           <input
+            className="border p-2 w-full"
             type="number"
-            value={preis95}
-            onChange={(e) => setPreis95(e.target.value)}
-            className="border p-2 rounded w-full"
+            value={super95}
+            onChange={(e) => setSuper95(e.target.value)}
           />
-        </label>
+        </div>
 
-        <label className="w-full">
-          <div className="mb-2 font-semibold">Preis E10 (€/l)</div>
+        <div>
+          <label className="block mb-2">Preis E10 (€/L)</label>
           <input
+            className="border p-2 w-full"
             type="number"
-            value={preisE10}
-            onChange={(e) => setPreisE10(e.target.value)}
-            className="border p-2 rounded w-full"
+            value={e10}
+            onChange={(e) => setE10(e.target.value)}
           />
-        </label>
+        </div>
       </div>
 
-      <div className="text-lg mt-4">{lohntSich}</div>
-      <div className="text-lg">Ersparnis mit E10: <strong>{ersparnisPro100km} €</strong> pro 100 km</div>
+      <div className="space-y-2">
+        <p>{lohntSichText}</p>
+        <p className={`${textFarbe} font-semibold`}>
+          {ersparnisText}: {Math.abs(ersparnis).toFixed(2)} € auf 100 km
+        </p>
+      </div>
 
-      <hr className="border-t border-gray-300 w-full max-w-md my-10" />
+      <hr className="my-6" />
 
-      <h2 className="text-xl font-bold">Fahrkosten-Rechner</h2>
+      <div className="space-y-4">
+        <h2 className="text-xl font-bold">Fahrkosten-Rechner</h2>
 
-      <div className="flex flex-col items-center space-y-4 w-full max-w-xs">
-        <label className="w-full">
-          <div className="mb-2 font-semibold">Fahrstrecke (km)</div>
+        <div>
+          <label className="block mb-2">Strecke (km)</label>
           <input
+            className="border p-2 w-full"
             type="number"
             value={strecke}
             onChange={(e) => setStrecke(e.target.value)}
-            className="border p-2 rounded w-full"
           />
-        </label>
-      </div>
+        </div>
 
-      <div className="text-lg mt-2">
-        Mit Super 95 kostet die Fahrt: <strong>{kosten95} €</strong>
-      </div>
-      <div className="text-lg">
-        Mit E10 kostet die Fahrt: <strong>{kostenE10} €</strong>
+        <p>Kosten mit Super 95: {kosten95.toFixed(2)} €</p>
+        <p>Kosten mit E10: {kostenE10.toFixed(2)} €</p>
       </div>
     </main>
   );
