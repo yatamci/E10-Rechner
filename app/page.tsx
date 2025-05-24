@@ -87,8 +87,8 @@ export default function Home() {
 
       <div className="e10-results">
         <div className="e10-spritverbrauch">
-          Verbrauch an Sprit: {spritVerbrauch} L
-        </div>
+  Verbrauch an Sprit: {spritVerbrauch.toFixed(2).replace('.', ',')} L
+</div>
         <div>Kosten mit Super 95: {kosten95.toFixed(2).replace('.', ',')} €</div>
         <div>Kosten mit Super E10: {kostenE10.toFixed(2).replace('.', ',')} €</div>
         <div className="e10-savings">
