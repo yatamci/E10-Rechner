@@ -61,15 +61,21 @@ export default function Home() {
         className="mb-4 p-2 border rounded w-40"
       />
 
-      <div className="mb-1">Kosten mit Super 95: {kosten95.toFixed(2)} €</div>
-      <div className="mb-1">Kosten mit Super E10: {kostenE10.toFixed(2)} €</div>
+<div className="mb-1">
+        Kosten mit Super 95: {kosten95.toFixed(2).replace('.', ',')} €
+      </div>
+      <div className="mb-1">
+        Kosten mit Super E10: {kostenE10.toFixed(2).replace('.', ',')} €
+      </div>
       <div>
         {differenz > 0
-          ? `Ersparnis mit Super E10: ${differenz.toFixed(2)} €`
+          ? `Ersparnis mit Super E10: ${differenz.toFixed(2).replace('.', ',')} €`
           : differenz < 0
-          ? `Mehrkosten mit Super E10: ${Math.abs(differenz).toFixed(2)} €`
+          ? `Mehrkosten mit Super E10: ${Math.abs(differenz).toFixed(2).replace('.', ',')} €`
           : 'Kein Unterschied bei den Kosten.'}
       </div>
     </main>
   );
 }
+
+
