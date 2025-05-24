@@ -66,11 +66,17 @@ export default function Home() {
           onChange={(e) => setPreisE10(parseFloat(e.target.value))}
           className="p-2 border rounded"
         />
+      
+</div>
+
+      <div className="mt-6 mb-2 text-center">
+        {ergebnis}
       </div>
 
-      <div className="mb-2">{ergebnis}</div>
-
       <hr className="w-full my-6" />
+    </main>
+  );
+}
 
       <div className="w-full max-w-xs flex flex-col mb-4">
         <label htmlFor="strecke" className="block mb-1">
