@@ -30,7 +30,7 @@ export default function Home() {
 
   return (
     <div className="e10-container">
-      <h1>E10-Rechner</h1>
+      <h1 className="e10-title">E10-Rechner</h1>
       
       <div className="e10-input-group">
         <label>Verbrauch pro 100 km (L)</label>
@@ -65,7 +65,7 @@ export default function Home() {
         />
       </div>
 
-      <div className={`e10-ergebnis-box ${ergebnisFarbe}`}>
+      <div className={`e10-result-box ${ergebnisFarbe}`}>
         {ergebnis}
       </div>
 
@@ -81,10 +81,10 @@ export default function Home() {
         />
       </div>
 
-      <div className="e10-ergebnis-text">
+      <div className="e10-results">
         <div>Kosten mit Super 95: {kosten95.toFixed(2).replace('.', ',')} €</div>
         <div>Kosten mit Super E10: {kostenE10.toFixed(2).replace('.', ',')} €</div>
-        <div className="e10-ersparnis">
+        <div className="e10-savings">
           {differenz > 0
             ? `Ersparnis mit Super E10: ${differenz.toFixed(2).replace('.', ',')} €`
             : differenz < 0
