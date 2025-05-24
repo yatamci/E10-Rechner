@@ -15,19 +15,24 @@ export default function Home() {
   const diffProzent = ((preis95 - preisE10) / preis95) * 100;
 
   let ergebnis = '';
+  let ergebnisFarbe = '';
+  
   if (diffProzent >= 2) {
     ergebnis = 'E10 lohnt sich!';
+    ergebnisFarbe = 'ergebnis-gruen';
   } else if (diffProzent >= 0) {
     ergebnis = 'E10 lohnt sich nicht wirklich.';
+    ergebnisFarbe = 'ergebnis-gelb';
   } else {
-    ergebnis = 'E10 ist teurer als Super 95!';
+    ergebnis = 'E10 lohnt sich nicht!';
+    ergebnisFarbe = 'ergebnis-rot';
   }
 
   return (
     <div className="e10-container">
       <h1>E10-Rechner</h1>
       
-      <div>
+      <div className="e10-input-group">
         <label>Verbrauch pro 100 km (L)</label>
         <input
           type="number"
@@ -38,7 +43,7 @@ export default function Home() {
         />
       </div>
 
-      <div>
+      <div className="e10-input-group">
         <label>Super 95 Preis (€/L)</label>
         <input
           type="number"
@@ -49,7 +54,7 @@ export default function Home() {
         />
       </div>
 
-      <div>
+      <div className="e10-input-group">
         <label>Super E10 Preis (€/L)</label>
         <input
           type="number"
@@ -60,11 +65,13 @@ export default function Home() {
         />
       </div>
 
-      <div className="e10-result">{ergebnis}</div>
+      <div className={`e10-ergebnis-box ${ergebnisFarbe}`}>
+        {ergebnis}
+      </div>
 
       <hr className="e10-divider" />
 
-      <div>
+      <div className="e10-input-group">
         <label>Strecke (km)</label>
         <input
           type="number"
@@ -74,10 +81,10 @@ export default function Home() {
         />
       </div>
 
-      <div className="e10-results">
+      <div className="e10-ergebnis-text">
         <div>Kosten mit Super 95: {kosten95.toFixed(2).replace('.', ',')} €</div>
         <div>Kosten mit Super E10: {kostenE10.toFixed(2).replace('.', ',')} €</div>
-        <div className="e10-savings">
+        <div className="e10-ersparnis">
           {differenz > 0
             ? `Ersparnis mit Super E10: ${differenz.toFixed(2).replace('.', ',')} €`
             : differenz < 0
