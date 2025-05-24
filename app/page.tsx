@@ -26,10 +26,10 @@ export default function Home() {
     <main className="container mx-auto p-4 max-w-md">
       <h1 className="text-2xl font-bold mb-6 text-center">E10-Rechner</h1>
       
-      <div className="space-y-6">
+      <div className="space-y-4">
         {/* Verbrauch */}
-        <div>
-          <label className="block mb-1">Verbrauch pro 100 km (L)</label>
+        <div className="mb-4">
+          <label className="block mb-2">Verbrauch pro 100 km (L)</label>
           <input
             type="number"
             step="0.01"
@@ -40,8 +40,8 @@ export default function Home() {
         </div>
 
         {/* Super 95 Preis */}
-        <div>
-          <label className="block mb-1">Super 95 Preis (€/L)</label>
+        <div className="mb-4">
+          <label className="block mb-2">Super 95 Preis (€/L)</label>
           <input
             type="number"
             step="0.001"
@@ -52,8 +52,8 @@ export default function Home() {
         </div>
 
         {/* E10 Preis */}
-        <div>
-          <label className="block mb-1">Super E10 Preis (€/L)</label>
+        <div className="mb-4">
+          <label className="block mb-2">Super E10 Preis (€/L)</label>
           <input
             type="number"
             step="0.001"
@@ -64,18 +64,18 @@ export default function Home() {
         </div>
 
         {/* Ergebnis */}
-        <div className="py-2">
-          <div className="text-lg font-medium text-center">{ergebnis}</div>
+        <div className="mb-6 text-center py-2 bg-gray-100 rounded">
+          <div className="text-lg font-medium">{ergebnis}</div>
         </div>
 
         {/* Horizontale Linie mit Abständen */}
-        <div className="py-2">
+        <div className="py-4">
           <hr className="border-t border-gray-300" />
         </div>
 
         {/* Strecke */}
-        <div>
-          <label className="block mb-1">Strecke (km)</label>
+        <div className="mb-4">
+          <label className="block mb-2">Strecke (km)</label>
           <input
             type="number"
             value={strecke}
