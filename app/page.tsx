@@ -1,11 +1,28 @@
 'use client';
 
 import { useState } from 'react';
-import './styles.css'; // Neue CSS-Datei
+import './e10-styles.css';
 
 export default function Home() {
-  // [Behalten Sie Ihren bestehenden State bei]
-  
+  const [verbrauch, setVerbrauch] = useState(6.80);
+  const [preis95, setPreis95] = useState(1.689);
+  const [preisE10, setPreisE10] = useState(1.639);
+  const [strecke, setStrecke] = useState(30);
+
+  const kosten95 = +(verbrauch * preis95 * strecke / 100).toFixed(2);
+  const kostenE10 = +(verbrauch * preisE10 * strecke / 100).toFixed(2);
+  const differenz = +(kosten95 - kostenE10).toFixed(2);
+  const diffProzent = ((preis95 - preisE10) / preis95) * 100;
+
+  let ergebnis = '';
+  if (diffProzent >= 2) {
+    ergebnis = 'E10 lohnt sich!';
+  } else if (diffProzent >= 0) {
+    ergebnis = 'E10 lohnt sich nicht wirklich.';
+  } else {
+    ergebnis = 'E10 ist teurer als Super 95!';
+  }
+
   return (
     <div className="e10-container">
       <h1>E10-Rechner</h1>
