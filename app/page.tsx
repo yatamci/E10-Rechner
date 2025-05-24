@@ -12,8 +12,8 @@ export default function Home() {
   const pE10 = parseFloat(preisE10);
   const km = parseFloat(strecke);
 
-  const kosten95 = (v / 100) * km * p95;
-  const kostenE10 = (v / 100) * km * pE10;
+  const kosten95 = +(v / 100 * km * p95).toFixed(2);
+  const kostenE10 = +(v / 100 * km * pE10).toFixed(2);
   const differenz = +(kosten95 - kostenE10).toFixed(2);
   const prozent = 100 * (1 - pE10 / p95);
 
@@ -30,7 +30,7 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-start p-4">
       <h1 className="text-2xl font-bold mb-6">E10-Rechner</h1>
 
-      <div className="flex flex-col gap-4 w-full max-w-xs">
+      <div className="flex flex-col gap-2 w-full max-w-xs">
         <label className="font-semibold">Verbrauch pro 100 km (L)</label>
         <input
           type="number"
@@ -64,7 +64,7 @@ export default function Home() {
 
       <hr className="w-full my-8 border-gray-300" />
 
-      <div className="flex flex-col gap-4 w-full max-w-xs">
+      <div className="flex flex-col gap-2 w-full max-w-xs">
         <label className="font-semibold">Strecke (km)</label>
         <input
           type="number"
