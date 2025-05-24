@@ -1,95 +1,57 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import { useState } from "react";
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [verbrauch95, setVerbrauch95] = useState("");
+  const [preis95, setPreis95] = useState("");
+  const [preisE10, setPreisE10] = useState("");
+  const [ergebnis, setErgebnis] = useState("");
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+  const berechnen = () => {
+    const v95 = parseFloat(verbrauch95);
+    const p95 = parseFloat(preis95);
+    const pE10 = parseFloat(preisE10);
+    const mehrverbrauchE10 = v95 * 1.015; // ca. 1,5 % mehrverbrauch
+
+    const kosten95 = (v95 * p95) / 100;
+    const kostenE10 = (mehrverbrauchE10 * pE10) / 100;
+
+    if (kostenE10 < kosten95) {
+      setErgebnis("E10 lohnt sich!");
+    } else if (kostenE10 > kosten95) {
+      setErgebnis("Super 95 ist günstiger.");
+    } else {
+      setErgebnis("Beide sind gleich teuer.");
+    }
+  };
+
+  return (
+    <main style={{ padding: 20, fontFamily: "sans-serif" }}>
+      <h1>E10-Rechner</h1>
+
+      <p>Verbrauch mit Super 95 (L/100km):</p>
+      <input
+        type="number"
+        value={verbrauch95}
+        onChange={(e) => setVerbrauch95(e.target.value)}
+      />
+
+      <p>Preis Super 95 (€/L):</p>
+      <input
+        type="number"
+        value={preis95}
+        onChange={(e) => setPreis95(e.target.value)}
+      />
+
+      <p>Preis E10 (€/L):</p>
+      <input
+        type="number"
+        value={preisE10}
+        onChange={(e) => setPreisE10(e.target.value)}
+      />
+
+      <br /><br />
+      <button onClick={berechnen}>Berechnen</button>
+      <p style={{ fontWeight: "bold" }}>{ergebnis}</p>
+    </main>
   );
 }
