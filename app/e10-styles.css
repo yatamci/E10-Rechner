@@ -32,7 +32,7 @@
 
 .e10-result-box {
   width: 80%; /* Gleiche Breite wie Eingabefelder */
-  padding: 1rem;
+  padding: 0.75rem;
   margin: 1.5rem auto; /* Zentriert die Box */
   border-radius: 0.5rem;
   text-align: center;
@@ -41,7 +41,7 @@
 }
 
 .e10-divider {
-  width: 80%; /* Gleiche Breite wie andere Elemente */
+  width: 100%; /* Gleiche Breite wie andere Elemente */
   margin: 1.5rem auto; /* Zentriert die Linie */
   border: 0;
   border-top: 1px solid #e5e7eb;
