@@ -13,7 +13,8 @@ export default function Home() {
   const pE10 = parseFloat(preisE10);
   const km = parseFloat(strecke);
 
-  const ersparnis = ((v95 * (p95 - pE10)) / 100).toFixed(2);
+  const ersparnisPro100km = (v95 * (p95 - pE10)).toFixed(2);
+  const lohntSich = pE10 < p95 ? "Ja, E10 lohnt sich!" : "Nein, E10 lohnt sich nicht.";
   const kosten95 = ((km / 100) * v95 * p95).toFixed(2);
   const kostenE10 = ((km / 100) * v95 * pE10).toFixed(2);
 
@@ -53,9 +54,8 @@ export default function Home() {
         </label>
       </div>
 
-      <div className="text-lg mt-2">
-        Du sparst mit E10: <strong>{ersparnis} €</strong> pro 100 km
-      </div>
+      <div className="text-lg mt-4">{lohntSich}</div>
+      <div className="text-lg">Ersparnis mit E10: <strong>{ersparnisPro100km} €</strong> pro 100 km</div>
 
       <hr className="border-t border-gray-300 w-full max-w-md my-10" />
 
