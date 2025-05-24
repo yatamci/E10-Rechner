@@ -31,10 +31,6 @@ export default function Home() {
       : `Ersparnis mit Super E10: ${kostenDifferenz.toFixed(2)} €`;
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-start p-4">
-      <h1 className="text-4xl font-bold mb-8">E10-Rechner</h1>
-
-  return (
     <main className="p-4 space-y-6 max-w-md mx-auto">
       <div>
         <p>Verbrauch pro 100 km (L)</p>
