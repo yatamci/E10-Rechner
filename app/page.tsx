@@ -28,17 +28,18 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-start p-4">
       <h1 className="text-4xl font-bold mb-8">E10-Rechner</h1>
 
-      <div className="flex flex-col gap-4 w-full max-w-xs">
-        <div className="flex flex-col">
-          <label className="mb-1">Verbrauch pro 100 km (L):</label>
-          <input
-            type="number"
-            step="0.1"
-            value={verbrauch}
-            onChange={(e) => setVerbrauch(parseFloat(e.target.value))}
-            className="p-2 border rounded"
-          />
-        </div>
+      <div className="w-full max-w-xs">
+  <label htmlFor="verbrauch" className="block mb-1 font-medium">
+    Verbrauch pro 100 km (L):
+  </label>
+  <input
+    id="verbrauch"
+    type="number"
+    value={verbrauch}
+    onChange={(e) => setVerbrauch(parseFloat(e.target.value))}
+    className="w-full p-2 border rounded"
+  />
+</div>
 
         <div className="flex flex-col">
           <label className="mb-1">Super 95 Preis (€/L):</label>
