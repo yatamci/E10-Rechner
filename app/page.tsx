@@ -23,65 +23,70 @@ export default function Home() {
   }
 
   return (
-    <main className="container mx-auto p-4 max-w-md">
+    <main className="font-sans max-w-md mx-auto p-4">
       <h1 className="text-2xl font-bold mb-6 text-center">E10-Rechner</h1>
       
       <div className="space-y-4">
-        <div className="flex flex-col">
-          <label className="mb-2">Verbrauch pro 100 km (L)</label>
+        {/* Verbrauch */}
+        <div>
+          <label className="block mb-1">Verbrauch pro 100 km (L)</label>
           <input
             type="number"
             step="0.01"
             value={verbrauch}
             onChange={(e) => setVerbrauch(parseFloat(e.target.value))}
-            className="p-2 border rounded w-full"
+            className="p-2 border rounded w-full bg-gray-100"
           />
         </div>
 
-        <div className="flex flex-col">
-          <label className="mb-2">Super 95 Preis (€/L)</label>
+        {/* Super 95 Preis */}
+        <div>
+          <label className="block mb-1">Super 95 Preis (€/L)</label>
           <input
             type="number"
             step="0.001"
             value={preis95}
             onChange={(e) => setPreis95(parseFloat(e.target.value))}
-            className="p-2 border rounded w-full"
+            className="p-2 border rounded w-full bg-gray-100"
           />
         </div>
 
-        <div className="flex flex-col">
-          <label className="mb-2">Super E10 Preis (€/L)</label>
+        {/* E10 Preis */}
+        <div>
+          <label className="block mb-1">Super E10 Preis (€/L)</label>
           <input
             type="number"
             step="0.001"
             value={preisE10}
             onChange={(e) => setPreisE10(parseFloat(e.target.value))}
-            className="p-2 border rounded w-full"
+            className="p-2 border rounded w-full bg-gray-100"
           />
         </div>
 
-        <div className="py-4 text-center bg-gray-100 rounded">
+        {/* Ergebnis */}
+        <div className="py-4 text-center">
           <div className="text-lg font-medium">{ergebnis}</div>
         </div>
 
-        <div className="py-4">
-          <hr className="border-t border-gray-300" />
-        </div>
+        {/* Horizontale Linie */}
+        <hr className="my-4 border-gray-300" />
 
-        <div className="flex flex-col">
-          <label className="mb-2">Strecke (km)</label>
+        {/* Strecke */}
+        <div>
+          <label className="block mb-1">Strecke (km)</label>
           <input
             type="number"
             value={strecke}
             onChange={(e) => setStrecke(parseFloat(e.target.value))}
-            className="p-2 border rounded w-full"
+            className="p-2 border rounded w-full bg-gray-100"
           />
         </div>
 
-        <div className="space-y-2 mt-4 text-center">
-          <div>Kosten mit Super 95: {kosten95.toFixed(2).replace('.', ',')} €</div>
-          <div>Kosten mit Super E10: {kostenE10.toFixed(2).replace('.', ',')} €</div>
-          <div className="font-medium">
+        {/* Ergebnisse */}
+        <div className="space-y-2 mt-4">
+          <div className="text-center">Kosten mit Super 95: {kosten95.toFixed(2).replace('.', ',')} €</div>
+          <div className="text-center">Kosten mit Super E10: {kostenE10.toFixed(2).replace('.', ',')} €</div>
+          <div className="font-medium text-center">
             {differenz > 0
               ? `Ersparnis mit Super E10: ${differenz.toFixed(2).replace('.', ',')} €`
               : differenz < 0
