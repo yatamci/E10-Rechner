@@ -23,58 +23,68 @@ export default function Home() {
   }
 
   return (
-    <main>
-      <label className="mb-1">Verbrauch pro 100 km (L)</label>
-      <input
-        type="number"
-        step="0.01"
-        value={verbrauch}
-        onChange={(e) => setVerbrauch(parseFloat(e.target.value))}
-        className="mb-4 p-2 border rounded w-40"
-      />
+    <main className="container mx-auto p-4 max-w-md">
+      <div className="space-y-4">
+        <div className="flex flex-col">
+          <label className="mb-1">Verbrauch pro 100 km (L)</label>
+          <input
+            type="number"
+            step="0.01"
+            value={verbrauch}
+            onChange={(e) => setVerbrauch(parseFloat(e.target.value))}
+            className="p-2 border rounded w-40"
+          />
+        </div>
 
-      <label className="mb-1">Super 95 Preis (€/L)</label>
-      <input
-        type="number"
-        step="0.001"
-        value={preis95}
-        onChange={(e) => setPreis95(parseFloat(e.target.value))}
-        className="mb-4 p-2 border rounded w-40"
-      />
+        <div className="flex flex-col">
+          <label className="mb-1">Super 95 Preis (€/L)</label>
+          <input
+            type="number"
+            step="0.001"
+            value={preis95}
+            onChange={(e) => setPreis95(parseFloat(e.target.value))}
+            className="p-2 border rounded w-40"
+          />
+        </div>
 
-      <label className="mb-1">Super E10 Preis (€/L)</label>
-      <input
-        type="number"
-        step="0.001"
-        value={preisE10}
-        onChange={(e) => setPreisE10(parseFloat(e.target.value))}
-        className="mb-6 p-2 border rounded w-40"
-      />
+        <div className="flex flex-col">
+          <label className="mb-1">Super E10 Preis (€/L)</label>
+          <input
+            type="number"
+            step="0.001"
+            value={preisE10}
+            onChange={(e) => setPreisE10(parseFloat(e.target.value))}
+            className="p-2 border rounded w-40"
+          />
+        </div>
 
-      <div className="mb-2">{ergebnis}</div>
+        <div className="py-4">
+          <div className="text-lg font-medium mb-2">{ergebnis}</div>
+        </div>
 
-      <hr className="w-full my-6" />
+        <hr className="my-4" />
 
-      <label className="mb-1">Strecke (km)</label>
-      <input
-        type="number"
-        value={strecke}
-        onChange={(e) => setStrecke(parseFloat(e.target.value))}
-        className="mb-4 p-2 border rounded w-40"
-      />
+        <div className="flex flex-col">
+          <label className="mb-1">Strecke (km)</label>
+          <input
+            type="number"
+            value={strecke}
+            onChange={(e) => setStrecke(parseFloat(e.target.value))}
+            className="p-2 border rounded w-40"
+          />
+        </div>
 
-      <div className="mb-1">
-        Kosten mit Super 95: {kosten95.toFixed(2).replace('.', ',')} €
-      </div>
-      <div className="mb-1">
-        Kosten mit Super E10: {kostenE10.toFixed(2).replace('.', ',')} €
-      </div>
-      <div>
-        {differenz > 0
-          ? `Ersparnis mit Super E10: ${differenz.toFixed(2).replace('.', ',')} €`
-          : differenz < 0
-          ? `Mehrkosten mit Super E10: ${Math.abs(differenz).toFixed(2).replace('.', ',')} €`
-          : 'Kein Unterschied bei den Kosten.'}
+        <div className="space-y-2 mt-4">
+          <div>Kosten mit Super 95: {kosten95.toFixed(2).replace('.', ',')} €</div>
+          <div>Kosten mit Super E10: {kostenE10.toFixed(2).replace('.', ',')} €</div>
+          <div className="font-medium">
+            {differenz > 0
+              ? `Ersparnis mit Super E10: ${differenz.toFixed(2).replace('.', ',')} €`
+              : differenz < 0
+              ? `Mehrkosten mit Super E10: ${Math.abs(differenz).toFixed(2).replace('.', ',')} €`
+              : 'Kein Unterschied bei den Kosten.'}
+          </div>
+        </div>
       </div>
     </main>
   );
