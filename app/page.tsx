@@ -31,8 +31,8 @@ export default function Home() {
       <h1 className="text-2xl font-bold mb-6">E10-Rechner</h1>
 
       <div className="flex flex-col gap-6 w-full max-w-xs">
-        <div>
-          <label className="block font-semibold mb-1">Verbrauch pro 100 km (L)</label>
+        <div className="flex flex-col">
+          <label className="block font-semibold mb-2">Verbrauch pro 100 km (L)</label>
           <input
             type="number"
             value={verbrauch}
@@ -41,8 +41,8 @@ export default function Home() {
           />
         </div>
 
-        <div>
-          <label className="block font-semibold mb-1">Super 95 Preis (€/L)</label>
+        <div className="flex flex-col">
+          <label className="block font-semibold mb-2">Super 95 Preis (€/L)</label>
           <input
             type="number"
             value={preisSuper}
@@ -51,8 +51,8 @@ export default function Home() {
           />
         </div>
 
-        <div>
-          <label className="block font-semibold mb-1">Super E10 Preis (€/L)</label>
+        <div className="flex flex-col">
+          <label className="block font-semibold mb-2">Super E10 Preis (€/L)</label>
           <input
             type="number"
             value={preisE10}
@@ -62,17 +62,25 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="mt-8 text-center">
+      <div className="mt-8 text-center space-y-2">
         <p className={`font-semibold ${prozent < 0 ? "text-red-600" : prozent < 2 ? "text-yellow-600" : "text-green-700"}`}>
           {lohntText}
+        </p>
+        <p>
+          <span className="font-semibold">
+            {prozent < 0 ? "Mehrkosten mit E10:" : "Ersparnis mit E10:"}
+          </span>{" "}
+          <span className={`font-bold ${prozent < 0 ? "text-red-600" : ""}`}>
+            {Math.abs(differenz).toFixed(2)} €
+          </span>
         </p>
       </div>
 
       <hr className="w-full my-8 border-gray-300" />
 
       <div className="flex flex-col gap-6 w-full max-w-xs">
-        <div>
-          <label className="block font-semibold mb-1">Strecke (km)</label>
+        <div className="flex flex-col">
+          <label className="block font-semibold mb-2">Strecke (km)</label>
           <input
             type="number"
             value={strecke}
@@ -90,14 +98,6 @@ export default function Home() {
         <p>
           <span className="font-semibold">Kosten mit E10:</span>{" "}
           <span className="font-bold">{kostenE10.toFixed(2)} €</span>
-        </p>
-        <p>
-          <span className="font-semibold">
-            {prozent < 0 ? "Mehrkosten mit E10:" : "Ersparnis mit E10:"}
-          </span>{" "}
-          <span className={`font-bold ${prozent < 0 ? "text-red-600" : ""}`}>
-            {Math.abs(differenz).toFixed(2)} €
-          </span>
         </p>
       </div>
     </main>
