@@ -16,19 +16,23 @@ export default function Home() {
   const kostenE10 = (v / 100) * km * pE10;
   const differenz = +(kosten95 - kostenE10).toFixed(2);
   const prozent = 100 * (1 - pE10 / p95);
-  const lohnt = prozent < 0
-    ? "Mehrkosten mit E10:"
-    : prozent < 2
-    ? "E10 lohnt sich nicht wirklich."
-    : "Ersparnis mit E10:";
+
+  let lohntText = "";
+  if (prozent >= 2) {
+    lohntText = "E10 lohnt sich.";
+  } else if (prozent >= 0) {
+    lohntText = "E10 lohnt sich nicht wirklich.";
+  } else {
+    lohntText = "E10 ist teurer als Super 95.";
+  }
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-start p-4">
       <h1 className="text-2xl font-bold mb-6">E10-Rechner</h1>
 
-      <div className="flex flex-col gap-4 w-full max-w-xs">
+      <div className="flex flex-col gap-6 w-full max-w-xs">
         <div>
-          <label className="font-semibold">Verbrauch pro 100 km</label>
+          <label className="block font-semibold mb-1">Verbrauch pro 100 km (L)</label>
           <input
             type="number"
             value={verbrauch}
@@ -38,7 +42,7 @@ export default function Home() {
         </div>
 
         <div>
-          <label className="font-semibold">Super 95 Preis (€)</label>
+          <label className="block font-semibold mb-1">Super 95 Preis (€/L)</label>
           <input
             type="number"
             value={preisSuper}
@@ -48,7 +52,7 @@ export default function Home() {
         </div>
 
         <div>
-          <label className="font-semibold">E10 Preis (€)</label>
+          <label className="block font-semibold mb-1">Super E10 Preis (€/L)</label>
           <input
             type="number"
             value={preisE10}
@@ -56,9 +60,19 @@ export default function Home() {
             className="w-full p-2 border rounded"
           />
         </div>
+      </div>
 
+      <div className="mt-8 text-center">
+        <p className={`font-semibold ${prozent < 0 ? "text-red-600" : prozent < 2 ? "text-yellow-600" : "text-green-700"}`}>
+          {lohntText}
+        </p>
+      </div>
+
+      <hr className="w-full my-8 border-gray-300" />
+
+      <div className="flex flex-col gap-6 w-full max-w-xs">
         <div>
-          <label className="font-semibold">Strecke (km)</label>
+          <label className="block font-semibold mb-1">Strecke (km)</label>
           <input
             type="number"
             value={strecke}
@@ -68,22 +82,20 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="mt-8 text-center">
-        {prozent >= 2 && (
-          <p className="text-green-700 font-semibold">E10 lohnt sich.</p>
-        )}
-        {prozent < 2 && prozent >= 0 && (
-          <p className="text-yellow-600 font-semibold">E10 lohnt sich nicht wirklich.</p>
-        )}
-        {prozent < 0 && (
-          <p className="text-red-600 font-semibold">E10 ist teurer als Super 95.</p>
-        )}
-
-        <p className="mt-2">
+      <div className="mt-6 text-center space-y-2">
+        <p>
+          <span className="font-semibold">Kosten mit Super 95:</span>{" "}
+          <span className="font-bold">{kosten95.toFixed(2)} €</span>
+        </p>
+        <p>
+          <span className="font-semibold">Kosten mit E10:</span>{" "}
+          <span className="font-bold">{kostenE10.toFixed(2)} €</span>
+        </p>
+        <p>
           <span className="font-semibold">
-            {lohnt}
+            {prozent < 0 ? "Mehrkosten mit E10:" : "Ersparnis mit E10:"}
           </span>{" "}
-          <span className={prozent < 0 ? "text-red-600 font-bold" : "font-bold"}>
+          <span className={`font-bold ${prozent < 0 ? "text-red-600" : ""}`}>
             {Math.abs(differenz).toFixed(2)} €
           </span>
         </p>
