@@ -13,11 +13,15 @@ export default function Home() {
   const kostenE10 = +(verbrauch * preisE10 * strecke / 100).toFixed(2);
   const differenz = +(kosten95 - kostenE10).toFixed(2);
   const diffProzent = ((preis95 - preisE10) / preis95) * 100;
+  const spritVerbrauch = +(strecke * verbrauch / 100).toFixed(2);
 
   let ergebnis = '';
   let ergebnisFarbe = '';
   
-  if (diffProzent >= 2) {
+  if (diffProzent >= 5) {
+    ergebnis = 'E10 lohnt sich sehr!';
+    ergebnisFarbe = 'ergebnis-blau';
+  } else if (diffProzent >= 2) {
     ergebnis = 'E10 lohnt sich!';
     ergebnisFarbe = 'ergebnis-gruen';
   } else if (diffProzent >= 0) {
@@ -82,6 +86,9 @@ export default function Home() {
       </div>
 
       <div className="e10-results">
+        <div className="e10-spritverbrauch">
+          Verbrauch an Sprit: {spritVerbrauch} L
+        </div>
         <div>Kosten mit Super 95: {kosten95.toFixed(2).replace('.', ',')} €</div>
         <div>Kosten mit Super E10: {kostenE10.toFixed(2).replace('.', ',')} €</div>
         <div className="e10-savings">

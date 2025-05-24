@@ -1,5 +1,5 @@
 .e10-container {
-  max-width: 400px; /* Reduzierte Maximalbreite */
+  max-width: 400px;
   margin: 1rem auto 2rem auto;
   padding: 0 1rem;
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
@@ -17,11 +17,11 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Zentriert die Elemente */
+  align-items: center;
 }
 
 .e10-input {
-  width: 80%; /* Kürzere Breite */
+  width: 80%;
   padding: 0.75rem;
   border: 1px solid #d1d5db;
   border-radius: 0.5rem;
@@ -31,9 +31,9 @@
 }
 
 .e10-result-box {
-  width: 80%; /* Gleiche Breite wie Eingabefelder */
-  padding: 0.75rem;
-  margin: 1.5rem auto; /* Zentriert die Box */
+  width: 80%;
+  padding: 1rem;
+  margin: 1.5rem auto;
   border-radius: 0.5rem;
   text-align: center;
   font-weight: bold;
@@ -41,8 +41,8 @@
 }
 
 .e10-divider {
-  width: 100%; /* Gleiche Breite wie andere Elemente */
-  margin: 1.5rem auto; /* Zentriert die Linie */
+  width: 80%;
+  margin: 1.5rem auto;
   border: 0;
   border-top: 1px solid #e5e7eb;
 }
@@ -53,12 +53,23 @@
   line-height: 1.6;
 }
 
+.e10-spritverbrauch {
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
 .e10-savings {
   font-weight: bold;
   margin-top: 0.5rem;
 }
 
 /* Farben */
+.ergebnis-blau {
+  background-color: #dbeafe;
+  color: #1e40af;
+  border: 1px solid #bfdbfe;
+}
+
 .ergebnis-gruen {
   background-color: #d1fae5;
   color: #065f46;
@@ -76,4 +87,3 @@
   color: #991b1b;
   border: 1px solid #fecaca;
 }
-
