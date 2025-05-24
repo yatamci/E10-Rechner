@@ -18,50 +18,62 @@ export default function Home() {
   const kostenE10 = ((km / 100) * v95 * pE10).toFixed(2);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-start p-8 space-y-10">
+    <main className="flex min-h-screen flex-col items-center justify-start p-8 space-y-8">
       <h1 className="text-2xl font-bold">E10-Rechner</h1>
 
-      <input
-        type="number"
-        value={verbrauch95}
-        onChange={(e) => setVerbrauch95(e.target.value)}
-        placeholder="Verbrauch (l/100 km)"
-        className="border p-2 rounded w-60"
-      />
+      <div className="flex flex-col items-center space-y-4 w-full max-w-xs">
+        <label className="w-full">
+          <div className="mb-2 font-semibold">Verbrauch pro 100 km (l)</div>
+          <input
+            type="number"
+            value={verbrauch95}
+            onChange={(e) => setVerbrauch95(e.target.value)}
+            className="border p-2 rounded w-full"
+          />
+        </label>
 
-      <input
-        type="number"
-        value={preis95}
-        onChange={(e) => setPreis95(e.target.value)}
-        placeholder="Preis Super 95"
-        className="border p-2 rounded w-60"
-      />
+        <label className="w-full">
+          <div className="mb-2 font-semibold">Preis Super 95 (€/l)</div>
+          <input
+            type="number"
+            value={preis95}
+            onChange={(e) => setPreis95(e.target.value)}
+            className="border p-2 rounded w-full"
+          />
+        </label>
 
-      <input
-        type="number"
-        value={preisE10}
-        onChange={(e) => setPreisE10(e.target.value)}
-        placeholder="Preis E10"
-        className="border p-2 rounded w-60"
-      />
+        <label className="w-full">
+          <div className="mb-2 font-semibold">Preis E10 (€/l)</div>
+          <input
+            type="number"
+            value={preisE10}
+            onChange={(e) => setPreisE10(e.target.value)}
+            className="border p-2 rounded w-full"
+          />
+        </label>
+      </div>
 
-      <div className="mt-4 text-lg">
+      <div className="text-lg mt-2">
         Du sparst mit E10: <strong>{ersparnis} €</strong> pro 100 km
       </div>
 
-      <hr className="border-t border-gray-300 w-full my-10" />
+      <hr className="border-t border-gray-300 w-full max-w-md my-10" />
 
       <h2 className="text-xl font-bold">Fahrkosten-Rechner</h2>
 
-      <input
-        type="number"
-        value={strecke}
-        onChange={(e) => setStrecke(e.target.value)}
-        placeholder="Strecke (km)"
-        className="border p-2 rounded w-60"
-      />
+      <div className="flex flex-col items-center space-y-4 w-full max-w-xs">
+        <label className="w-full">
+          <div className="mb-2 font-semibold">Fahrstrecke (km)</div>
+          <input
+            type="number"
+            value={strecke}
+            onChange={(e) => setStrecke(e.target.value)}
+            className="border p-2 rounded w-full"
+          />
+        </label>
+      </div>
 
-      <div className="mt-4 text-lg">
+      <div className="text-lg mt-2">
         Mit Super 95 kostet die Fahrt: <strong>{kosten95} €</strong>
       </div>
       <div className="text-lg">
